@@ -1,23 +1,38 @@
 require('dotenv').config();
 
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const userRoutes = require('./routes/userRoutes');
+const eventEmitter = require('./eventEmitter'); // Import the event emitter
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(bodyParser.json());
+// Middleware
+app.use(express.json());
 
-const userRoutes = require('./routes/userRoutes');
+// Routes
 app.use('/users', userRoutes);
 
-mongoose.connect(process.env.MONGO_URI);
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log('Connected to MongoDB');
+        app.listen(PORT, () => {
+            console.log(`User Service running on port ${PORT}`);
+        });
+    })
+    .catch(err => {
+        console.error('Failed to connect to MongoDB', err);
+    });
 
-mongoose.connection.on('connected', () => {
-    console.log('Connected to MongoDB');
+// Event Listeners
+eventEmitter.on('User Registered', (user) => {
+    console.log(`User Registered: ${user.email}`);
+    // Additional logic for handling the event
 });
 
-app.listen(PORT, () => {
-    console.log(`User Service running on port ${PORT}`);
+eventEmitter.on('User Profile Updated', (user) => {
+    console.log(`User Profile Updated: ${user.email}`);
+    // Additional logic for handling the event
 });
