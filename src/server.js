@@ -1,11 +1,12 @@
 require('dotenv').config(); //importing the dotenv package .env to process.env
 const express = require('express');
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); //installing odm
 const userRoutes = require('./routes/userRoutes');
 const eventEmitter = require('./eventEmitter'); // Import the event emitter
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
 
 // Middleware
 app.use(express.json());
