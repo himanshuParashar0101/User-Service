@@ -5,16 +5,16 @@ const bcrypt = require('bcrypt'); // Import bcrypt for password hashing and comp
 // Define a schema for the user model
 const userSchema = new mongoose.Schema({
     username: {
-        type: String, // Specify the data type as String
-        required: true // The username field is mandatory
+        type: String,
+        required: true
     },
     password: {
-        type: String, // Specify the data type as String
-        required: true // The password field is mandatory
+        type: String,
+        required: true
     },
     email: {
-        type: String, // Specify the data type as String
-        required: true // The email field is mandatory
+        type: String,
+        required: true
     }
 });
 
