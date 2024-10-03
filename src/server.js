@@ -6,7 +6,7 @@ const userRoutes = require('./routes/userRoutes');
 const eventEmitter = require('./eventEmitter'); // Import the event emitter
 
 const app = express(); // Create an instance of an Express application
-const PORT = process.env.PORT || 3000; // Set the port to listen on
+const PORT = process.env.PORT || 3001; // Set the port to listen on
 
 // Middleware to parse incoming JSON requests
 app.use(express.json());
