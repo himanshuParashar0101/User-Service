@@ -32,7 +32,7 @@ const authenticateUser = async (req, res) => {
         const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
         res.json({ token });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: error.message });//carch
     }
 };
 
